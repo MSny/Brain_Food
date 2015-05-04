@@ -7,7 +7,10 @@ console.log("hi")
 		events: {
 			'click button.editCategoryButton': 'editCategory',
 			'click button.deleteCategoryButton': 'deleteCategory',
-			'click button.updateCategoryButton': 'updateCategory'
+			'click button.updateCategoryButton': 'updateCategory',
+			'click button.addDishButton': 'addDish',
+			'click button.updateDishButton': 'createDish',
+			'click span.catName': 'showDish'
 		},
 
 		updateCategory: function(){
@@ -28,11 +31,47 @@ console.log("hi")
 	editCategory: function(){
 		this.$('span.category').hide();
 		this.$('span.editForm').show();
+		console.log(this.$('span.category'))
 	},
 
 	//delete category
 	deleteCategory: function(){
 		this.model.destroy();
+	},
+
+	addDish: function(){
+		this.$('span.addDishForm').show();
+		console.log(this.$('span.addDishForm'))
+		console.log("added")
+	},
+
+	createDish: function(){
+		//grab name from edit form
+		var newDishName = this.$('.newDishName').val();
+		var dishId = this.$('.dishId').val()
+		var dishPrice = this.$('.dishPrice').val()
+		console.log(dishId)
+		console.log(newDishName)
+		console.log(dish)
+
+
+		//add new category to database and trigger sync
+		dish.save({name: newDishName, category_id: dishId, price: dishPrice});
+
+		//reset text fields
+		// newDishName.val('');
+		$('.newDishName').val('')
+		$('.dishPrice').val('')
+
+		//persists the model in the database and triggers sync
+		dish.model.save();
+		dishesCol.fetch({
+			success: function(data) { console.log(data) }
+		});
+	}, 
+
+	showDish: function(){
+		this.$('span.dishes').show();
 	},
 
 	render: function(){
@@ -86,6 +125,27 @@ var createCategoryView = Backbone.View.extend({
 		nameField.val('');
 		picField.val('')
 	} //end create category view
+});
+
+var DishesView = Backbone.View.extend({
+	el: 'ul#dishesList', //attch to ul with id of menuCategory
+	initialize: function(){
+		//listen to the sync event and update when it it triggered
+		// console.log("listen")
+		this.listenTo(this.collection, 'sync remove', this.render);
+		// this.listenTo(this.collection, 'change', this.render);
+	},
+
+	render: function(){
+		var dishList = this.$el;
+		categories.html('');
+		//iterate over each element in the collection and render categoriesView
+		dish.collection.each(function(dish) {
+			categories.append(new CategoryView({model: dish}).render().$el);
+		});
+
+		return this;
+	}
 });
 // initialize a new Create category view and categories collection
 new createCategoryView({collection: categoriesCol})
