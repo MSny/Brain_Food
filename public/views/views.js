@@ -9,8 +9,7 @@ console.log("hi")
 			'click button.deleteCategoryButton': 'deleteCategory',
 			'click button.updateCategoryButton': 'updateCategory',
 			'click button.addDishButton': 'addDish',
-			'click button.updateDishButton': 'createDish',
-			'click span.catName': 'showDish'
+			'click button.updateDishButton': 'createDish'
 		},
 
 		updateCategory: function(){
@@ -62,6 +61,7 @@ console.log("hi")
 		// newDishName.val('');
 		$('.newDishName').val('')
 		$('.dishPrice').val('')
+		$('span.addDishForm').hide();
 
 		//persists the model in the database and triggers sync
 		dish.model.save();
@@ -70,9 +70,6 @@ console.log("hi")
 		});
 	}, 
 
-	showDish: function(){
-		this.$('span.dishes').show();
-	},
 
 	render: function(){
 		//render model associeted with this view
@@ -103,6 +100,8 @@ var CategoriesView = Backbone.View.extend({
 	}
 });//End Categories View
 
+/////////////////////////////////////////////////////////////////
+
 // add events to create category form
 var createCategoryView = Backbone.View.extend({
 	el: '#addCategory', //bind to add category
@@ -127,6 +126,27 @@ var createCategoryView = Backbone.View.extend({
 	} //end create category view
 });
 
+/////////////////////////////////////////////////////////////////
+// Single Dish View
+var DishView = Backbone.View.extend({
+		tagname: 'li',
+		template: _.template($('#dishesTemplate').html()),
+		events: {'click button.catName': 'showDish'},
+
+		showDish: function(){
+		console.log('show dish')
+		$('span.dishes').show();
+		
+	},
+
+		render: function(){
+		//render model associeted with this view
+		this.$el.html(this.template({dish: this.model.toJSON()}));
+		return this;
+		console.log('show dish')
+	}
+});
+// Multiple dishes view
 var DishesView = Backbone.View.extend({
 	el: 'ul#dishesList', //attch to ul with id of menuCategory
 	initialize: function(){
@@ -138,10 +158,10 @@ var DishesView = Backbone.View.extend({
 
 	render: function(){
 		var dishList = this.$el;
-		categories.html('');
+		dishList.html('');
 		//iterate over each element in the collection and render categoriesView
-		dish.collection.each(function(dish) {
-			categories.append(new CategoryView({model: dish}).render().$el);
+		this.collection.each(function(dish) {
+			dishList.append(new DishView({model: dish}).render().$el);
 		});
 
 		return this;
@@ -150,5 +170,6 @@ var DishesView = Backbone.View.extend({
 // initialize a new Create category view and categories collection
 new createCategoryView({collection: categoriesCol})
 new CategoriesView({collection: categoriesCol});
+new DishesView({collection: dishesCol});
 
 });
