@@ -40,7 +40,7 @@ app.get('/categories/:id', function(req, res){
 
 // Setting Post Route for category
 app.post('/categories', function(req, res){
-	db.run("INSERT INTO categories (name) VALUES (?)", req.body.name, function(err,row){
+	db.run("INSERT INTO categories (name, image_url) VALUES (?, ?)", req.body.name, req.body.image_url, function(err,row){
 		if(err){
 			throw err;
 		}

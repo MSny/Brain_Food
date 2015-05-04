@@ -1,5 +1,5 @@
 // Creating category Model
-var CategoryModel= Backbone.Model.extend({
+var Category= Backbone.Model.extend({
 	urlRoot: '/categories',
 	initialize: function(){
 		console.log('category was made!')
@@ -7,4 +7,4 @@ var CategoryModel= Backbone.Model.extend({
 });
 
 // test category
-var testCategory = new CategoryModel({name: 'Smart food', image_url: 'something.jpg'});
+var testCategory = new Category({name: 'Smart food', image_url: 'something.jpg'});
