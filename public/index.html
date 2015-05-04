@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Requiring Backbone and it's dependincies -->
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
     <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
-
+<!-- Linking models file, collections file and views file -->
     <script src = "/models/models.js"></script>
     <script src = "/collections/collections.js"></script>
     <script src = "/views/views.js"></script>
@@ -14,22 +15,27 @@
 	<header>
 		<h1>Brain Food</h1>
 	</header>
+<!-- Where each category is displayed within this ul -->
 	<ul id = "menuCategory"></ul>
 
+<!-- Container with the initial category creation inputs of Name and Pic -->
 	<div id = "addCategory">
 		<input type="text" id='newCategory' placeholder='New Category'>
 		<input type = 'text' id ='categoryPic' placeholder='pic url'>
 		<button id='createCategory'>Create!</button>
 	</div>
+	
+<!-- Template for the created category -->
 	<script type = 'text/template' id='categoryTemplate'>
-		<span class='category'>
+		// <span class='category'>
 			<%= category.name %>
 			< button class='editCategoryButton'>Edit</button>
 			< button class='deleteCategoryButton'>Delete</button>
-		</span>
-		<span class='editForm' style='display: none'>
-			<input type = 'text' id= 'newName<%= category.id %>' value='<%= category.name %>'>
-			<button class='updateCategoryButton'>Update</button>
+		// </span>
+// Template for the edit category name field and button
+		// <span class='editForm' style='display: none'>
+		// 	<input type = 'text' id= 'newName<%= category.id %>' value='<%= category.name %>'>
+		// 	<button class='updateCategoryButton'>Update</button>
 	</script>
 </body>
 </html>

@@ -4,41 +4,41 @@ $(document).ready(function(){
 	var CategoryView = Backbone.View.extend({
 		tagname: 'li',
 		template: _.template($('#categoryTemplate').html()),
-		events: {
-			'click button.editCategoryButton': 'editCategory',
-			'click button.deleteCategoryButton': 'deleteCategory',
-			'click button.updateCategoryButton': 'updateCategory'
-		},
+	// 	events: {
+	// 		'click button.editCategoryButton': 'editCategory',
+	// 		'click button.deleteCategoryButton': 'deleteCategory',
+	// 		'click button.updateCategoryButton': 'updateCategory'
+	// 	},
 
-		updateCategory: function(){
-		//grab name from edit form
-		var newName = this.$('#newName' + this.model.id).val();
+	// 	updateCategory: function(){
+	// 	//grab name from edit form
+	// 	var newName = this.$('#newName' + this.model.id).val();
 
-		//update model with those values locally
-		this.model.set({name: newName})
+	// 	//update model with those values locally
+	// 	this.model.set({name: newName})
 
-		//persists the model in the database and triggers sync
-		this.model.save();
-		var categoriesCol = new CategoryCollection();
-		categoriesCol.fetch({
-			success: function(data) { console.log(data) }
-		});
-	}, 
-	//renders the category edit form
-	editCategory: function(){
-		this.$('span.category').hide();
-		this.$('span.editForm').show();
-	},
+	// 	//persists the model in the database and triggers sync
+	// 	this.model.save();
+	// 	var categoriesCol = new CategoryCollection();
+	// 	categoriesCol.fetch({
+	// 		success: function(data) { console.log(data) }
+	// 	});
+	// }, 
+	// //renders the category edit form
+	// editCategory: function(){
+	// 	this.$('span.category').hide();
+	// 	this.$('span.editForm').show();
+	// },
 
-	//delete category
-	deleteCategory: function(){
-		this.model.destroy();
-	},
+	// //delete category
+	// deleteCategory: function(){
+	// 	this.model.destroy();
+	// },
 
 	render: function(){
 		console.log(this.$el.html)
 		//render model associeted with this view
-		this.$el.html(this.template({Category: this.model.toJSON()}));
+		this.$el.html(this.template({CategoryModel: this.model.toJSON()}));
 		return this;
 	}
 }); //end category view
@@ -49,7 +49,7 @@ var CategoriesView = Backbone.View.extend({
 	initialize: function(){
 		//listen to the sync event and update when it it triggered
 		this.listenTo(this.collection, 'sync remove', this.render);
-		this.listenTo(this.collection, 'change', this.render);
+		// this.listenTo(this.collection, 'change', this.render);
 	},
 
 	render: function(){
@@ -57,8 +57,8 @@ var CategoriesView = Backbone.View.extend({
 		categories.html('');
 		console.log(categories)
 		//iterate over each element in the collection and render categoriesView
-		this.collection.each(function(Category) {
-			categories.append(new CategoryView({model: Category}).render().$el);
+		this.collection.each(function(CategoryModel) {
+			categories.append(new CategoryView({model: CategoryModel}).render().$el);
 		});
 
 		return this;
@@ -86,6 +86,6 @@ var createCategoryView = Backbone.View.extend({
 	} //end create category view
 });
 // initialize a new Create category view and categories collection
-new CategoryView({collection: categories});
-new createCategoryView({collection: categories})
+new CategoryView({collection: categoriesCol});
+new createCategoryView({collection: categoriesCol})
 });

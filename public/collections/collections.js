@@ -1,5 +1,5 @@
 var CategoryCollection = Backbone.Collection.extend({
-	model: Category,
+	model: CategoryModel,
 	url: '/categories'
 })
 
