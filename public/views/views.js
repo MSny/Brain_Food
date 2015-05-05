@@ -17,18 +17,30 @@ console.log("hi")
 				},
 
 		showDish1: function(){
+		$('.dishCategoryNum2').hide();
+		$('.dishCategoryNum3').hide();
+		$('.dishCategoryNum4').hide();
 		$('.dishCategoryNum1').show();		
 		},
 
 		showDish2: function(){
+		$('.dishCategoryNum1').hide();
+		$('.dishCategoryNum3').hide();
+		$('.dishCategoryNum4').hide();
 		$('.dishCategoryNum2').show();		
 		},
 
 		showDish3: function(){
+		$('.dishCategoryNum2').hide();
+		$('.dishCategoryNum1').hide();
+		$('.dishCategoryNum4').hide();
 		$('.dishCategoryNum3').show();		
 		},
 
 		showDish4: function(){
+		$('.dishCategoryNum2').hide();
+		$('.dishCategoryNum3').hide();
+		$('.dishCategoryNum1').hide();
 		$('.dishCategoryNum4').show();		
 		},
 

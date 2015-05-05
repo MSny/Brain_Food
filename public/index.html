@@ -23,10 +23,10 @@
     <script src = "/views/views.js"></script>
 	<title>Brain Food</title>
 </head>
-<body>
+<body style='background-color: #607D8B'>
 	<header>
-		<!-- <div id = 'brainFood'><img src="http://i.imgur.com/dw521zP.png" style = 'width: 100%; position: relative; z-index: -1;'/>
-		</div> -->
+		<div id = 'brainFood' style='display:block; background: url(http://i.imgur.com/eprgxKv.png) 50% no-repeat fixed; background-size: cover; height: 600px;' >
+		</div>
 	</header>
 	<!-- Bootstrap row for categories -->
 	<div class='container' style='display: block;'>
@@ -42,7 +42,7 @@
 		<span class='category'>
 			<div class = 'categoryNumber<%=category.id%>'>
 			<span class = categoryPicture><img style="height:150px;max-width:150px;" src=<%= category.image_url %>></span>
-			<button class='catName<%=category.id%>'><%= category.name %></button>
+			<button class='catName<%=category.id%> btn btn-material-deep-purple btn-sm'><%= category.name %></button>
 			<button class='editCategoryButton btn btn-material-teal btn-sm'>Edit</button>
 			<button class='deleteCategoryButton btn btn-material-red btn-sm'>Delete</button>
 			<button class='addDishButton btn btn-material-light-green btn-sm'>Add Dish</button>
@@ -74,8 +74,8 @@
 	<script type = 'text/template' id='dishesTemplate'></body>
 	<span class='dishes'>
 	<div class ='dishCategoryNum<%=dish.category_id%>' style='display: none;'>
-		<%=dish.name %>
-		<span class = dishPicture><img style="height:150px;max-width:150px;" src=<%=dish.image_url %>></span>
+		<span class = dishPicture><img style="height:100px;max-width:100px; border-radius: 50px" src=<%=dish.image_url %>></span>
+		<%=dish.name %>...
 		Price: <%=dish.price %>
 		<button class='editDishButton btn btn-material-teal btn-sm'>Edit</button>
 		<button class='deleteDishButton btn btn-material-red btn-sm'>Delete</button>
@@ -91,11 +91,12 @@
 	</div>
 </div>
 		
+	</script>
 <!-- Container with the initial category creation inputs of Name and Pic -->
 	<div id = "addCategory">
 		<input type="text" id='newCategory' class='form-control floating-label' placeholder='New Category'>
 		<input type = 'text' id='categoryPic' class='form-control floating-label' placeholder='pic url'>
 		<button id='createCategory' class='btn btn-material-light-green btn-sm'>Create!</button>
 	</div>
-	</script>
+</body>
 </html>
