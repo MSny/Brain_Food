@@ -49,18 +49,20 @@ console.log("hi")
 		var newDishName = this.$('.newDishName').val();
 		var dishId = this.$('.dishId').val()
 		var dishPrice = this.$('.dishPrice').val()
+		var dishPic = this.$('.dishPic').val()
 		console.log(dishId)
 		console.log(newDishName)
 		console.log(dish)
 
 
 		//add new category to database and trigger sync
-		dish.save({name: newDishName, category_id: dishId, price: dishPrice});
+		dish.save({name: newDishName, category_id: dishId, price: dishPrice, image_url: dishPic});
 
 		//reset text fields
 		// newDishName.val('');
 		$('.newDishName').val('')
 		$('.dishPrice').val('')
+		$('.dishPic').val('')
 		$('span.addDishForm').hide();
 
 		//persists the model in the database and triggers sync
@@ -106,7 +108,6 @@ var CategoriesView = Backbone.View.extend({
 var createCategoryView = Backbone.View.extend({
 	el: '#addCategory', //bind to add category
 	events: {'click button#createCategory': 'createCategory'},
-
 	// create new category with data from form
 	createCategory: function(){
 		var nameField = this.$('#newCategory');
@@ -131,12 +132,42 @@ var createCategoryView = Backbone.View.extend({
 var DishView = Backbone.View.extend({
 		tagname: 'li',
 		template: _.template($('#dishesTemplate').html()),
-		events: {'click button.catName': 'showDish'},
+		events: {'click button.catName': 'showDish',
+				 'click button.deleteDishButton': 'deleteDish',
+				 'click button.editDishButton': 'editDish',
+				 'click button.updateDishButton': 'updateDish'
+				},
 
 		showDish: function(){
 		console.log('show dish')
 		$('span.dishes').show();
 		
+	},
+
+	deleteDish: function(){
+		this.model.destroy();
+	},
+
+	updateDish: function(){
+		//grab name from edit form
+		var newDishName = this.$('#newName' + this.model.id).val();
+		var newDishPrice = this.$('#newPrice' + this.model.id).val();
+		var newDishPic = this.$('#newPic' + this.model.id).val();
+
+		//update model with those values locally
+		this.model.set({name: newDishName, price: newDishPrice, image_url: newDishPic})
+
+		//persists the model in the database and triggers sync
+		this.model.save();
+		var categoriesCol = new CategoryCollection();
+		categoriesCol.fetch({
+			success: function(data) { console.log(data) }
+		});
+	}, 
+	//renders the category edit form
+	editDish: function(){
+		this.$('span.dishes').hide();
+		this.$('span.editDishForm').show();
 	},
 
 		render: function(){

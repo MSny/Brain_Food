@@ -28,6 +28,7 @@
 <!-- //Template for the created category  -->
 	<script type = 'text/template' id='categoryTemplate'>
 		<span class='category'>
+			<span class = categoryPicture><img src=<%= category.image_url %>></span>
 			<button class='catName'><%= category.name %></button>
 			<button class='editCategoryButton'>Edit</button>
 			<button class='deleteCategoryButton'>Delete</button>
@@ -41,6 +42,7 @@
 		<span class='addDishForm' style='display: none'>
 			<input type = 'text' class= 'newDishName' placeholder='Dish Name'>
 			<input type = 'text' class= 'dishPrice' placeholder='Dish Price'>
+			<input type = 'text' class= 'dishPic' placeholder='Dish Picture'>
 			<input class="dishId" type = 'hidden' value='<%= category.id %>'>
 			<button class='updateDishButton'>Add</button>
 		</span>
@@ -53,8 +55,18 @@
 			</ul>
 	<script type = 'text/template' id='dishesTemplate'></body>
 	<span class='dishes'>
-		<%=dish.name %> Price: <%=dish.price %>
+		<%=dish.name %>
+		<span class = dishPicture><img src=<%=dish.image_url %>></span>
+		Price: <%=dish.price %>
+		<button class='editDishButton'>Edit</button>
+		<button class='deleteDishButton'>Delete</button>
 	</span>
+	<span class='editDishForm' style='display: none'>
+			<input type = 'text' id= 'newName<%= dish.id %>' value='<%= dish.name %>'>
+			<input type = 'text' id= 'newPrice<%= dish.id %>' value='<%= dish.price %>'>
+			<input type = 'text' id= 'newPic<%= dish.id %>' value='<%= dish.image_url %>'>
+			<button class='updateDishButton'>Update</button>
+		</span>
 			
 		
 	</script>
