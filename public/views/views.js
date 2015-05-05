@@ -9,7 +9,27 @@ console.log("hi")
 			'click button.deleteCategoryButton': 'deleteCategory',
 			'click button.updateCategoryButton': 'updateCategory',
 			'click button.addDishButton': 'addDish',
-			'click button.updateDishButton': 'createDish'
+			'click button.updateDishButton': 'createDish',
+			'click button.catName1': 'showDish1',
+			'click button.catName2': 'showDish2',
+			'click button.catName3': 'showDish3',
+			'click button.catName4': 'showDish4'
+				},
+
+		showDish1: function(){
+		$('.dishCategoryNum1').show();		
+		},
+
+		showDish2: function(){
+		$('.dishCategoryNum2').show();		
+		},
+
+		showDish3: function(){
+		$('.dishCategoryNum3').show();		
+		},
+
+		showDish4: function(){
+		$('.dishCategoryNum4').show();		
 		},
 
 		updateCategory: function(){
@@ -132,17 +152,12 @@ var createCategoryView = Backbone.View.extend({
 var DishView = Backbone.View.extend({
 		tagname: 'li',
 		template: _.template($('#dishesTemplate').html()),
-		events: {'click button.catName': 'showDish',
+		events: {
 				 'click button.deleteDishButton': 'deleteDish',
 				 'click button.editDishButton': 'editDish',
 				 'click button.updateDishButton': 'updateDish'
 				},
 
-		showDish: function(){
-		console.log('show dish')
-		$('span.dishes').show();
-		
-	},
 
 	deleteDish: function(){
 		this.model.destroy();
@@ -198,6 +213,15 @@ var DishesView = Backbone.View.extend({
 		return this;
 	}
 });
+
+$('.catName1').click(function(){
+	$('.dishCategoryNum1').show();
+});
+
+$('.catName2').click(function(){
+	$('.dishCategoryNum2').show();
+});
+
 // initialize a new Create category view and categories collection
 new createCategoryView({collection: categoriesCol})
 new CategoriesView({collection: categoriesCol});

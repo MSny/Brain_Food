@@ -29,22 +29,24 @@
 		</div> -->
 	</header>
 	<!-- Bootstrap row for categories -->
+	<div class='container' style='display: block;'>
 	<div class ='row'>
-		<div class='col-md-3'>
-			<div class='row'>
+		<div class='col-md-6'>
+			<h3>Categories</h3>
 <!-- Where each category is displayed within this ul -->
 	<ul id = "menuCategory"><br></ul>
-			</div>
-		</div>
+		
 
 <!-- //Template for the created category  -->
 	<script type = 'text/template' id='categoryTemplate'>
 		<span class='category'>
+			<div class = 'categoryNumber<%=category.id%>'>
 			<span class = categoryPicture><img style="height:150px;max-width:150px;" src=<%= category.image_url %>></span>
-			<button class='catName'><%= category.name %></button>
+			<button class='catName<%=category.id%>'><%= category.name %></button>
 			<button class='editCategoryButton btn btn-material-teal btn-sm'>Edit</button>
 			<button class='deleteCategoryButton btn btn-material-red btn-sm'>Delete</button>
 			<button class='addDishButton btn btn-material-light-green btn-sm'>Add Dish</button>
+			</div>
 			<br>
 		</span>
 
@@ -63,17 +65,21 @@
 			
 		
 	</script>
+	</div>
 		<div class='col-md-6'>
+		<h3>Dishes</h3>
 <ul id ='dishesList'>
 				
 			</ul>
 	<script type = 'text/template' id='dishesTemplate'></body>
 	<span class='dishes'>
+	<div class ='dishCategoryNum<%=dish.category_id%>' style='display: none;'>
 		<%=dish.name %>
 		<span class = dishPicture><img style="height:150px;max-width:150px;" src=<%=dish.image_url %>></span>
 		Price: <%=dish.price %>
 		<button class='editDishButton btn btn-material-teal btn-sm'>Edit</button>
 		<button class='deleteDishButton btn btn-material-red btn-sm'>Delete</button>
+	</div>
 	</span>
 	<span class='editDishForm' style='display: none'>
 			<input type = 'text' id= 'newName<%= dish.id %>' class='form-control floating-label' value='<%= dish.name %>'>
@@ -83,6 +89,7 @@
 		</span>
 		</div>	
 	</div>
+</div>
 		
 <!-- Container with the initial category creation inputs of Name and Pic -->
 	<div id = "addCategory">
