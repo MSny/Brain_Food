@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Font awesome for rating star -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<link rel= "stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.css'>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <!-- Requiring Backbone and it's dependincies -->
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
@@ -13,61 +25,70 @@
 </head>
 <body>
 	<header>
-		<h1>Brain Food</h1>
+		<!-- <div id = 'brainFood'><img src="http://i.imgur.com/dw521zP.png" style = 'width: 100%; position: relative; z-index: -1;'/>
+		</div> -->
 	</header>
+	<!-- Bootstrap row for categories -->
+	<div class ='row'>
+		<div class='col-md-3'>
+			<div class='row'>
 <!-- Where each category is displayed within this ul -->
-	<ul id = "menuCategory"></ul>
-
-<!-- Container with the initial category creation inputs of Name and Pic -->
-	<div id = "addCategory">
-		<input type="text" id='newCategory' placeholder='New Category'>
-		<input type = 'text' id='categoryPic' placeholder='pic url'>
-		<button id='createCategory'>Create!</button>
-	</div>
+	<ul id = "menuCategory"><br></ul>
+			</div>
+		</div>
 
 <!-- //Template for the created category  -->
 	<script type = 'text/template' id='categoryTemplate'>
 		<span class='category'>
-			<span class = categoryPicture><img src=<%= category.image_url %>></span>
+			<span class = categoryPicture><img style="height:150px;max-width:150px;" src=<%= category.image_url %>></span>
 			<button class='catName'><%= category.name %></button>
-			<button class='editCategoryButton'>Edit</button>
-			<button class='deleteCategoryButton'>Delete</button>
-			<button class='addDishButton'>Add Dish</button>
+			<button class='editCategoryButton btn btn-material-teal btn-sm'>Edit</button>
+			<button class='deleteCategoryButton btn btn-material-red btn-sm'>Delete</button>
+			<button class='addDishButton btn btn-material-light-green btn-sm'>Add Dish</button>
+			<br>
 		</span>
 
 		<span class='editForm' style='display: none'>
-			<input type = 'text' id= 'newName<%= category.id %>' value='<%= category.name %>'>
-			<button class='updateCategoryButton'>Update</button>
+			<input type = 'text' id= 'newName<%= category.id %>' class='form-control floating-label' value='<%= category.name %>'>
+			<button class='updateCategoryButton btn btn-material-light-green btn-sm'>Update</button>
 		</span>
 		<span class='addDishForm' style='display: none'>
-			<input type = 'text' class= 'newDishName' placeholder='Dish Name'>
-			<input type = 'text' class= 'dishPrice' placeholder='Dish Price'>
-			<input type = 'text' class= 'dishPic' placeholder='Dish Picture'>
+			<input type = 'text' class= 'newDishName form-control floating-label' placeholder='Dish Name'>
+			<input type = 'text' class= 'dishPrice form-control floating-label' placeholder='Dish Price'>
+			<input type = 'text' class= 'dishPic form-control floating-label' placeholder='Dish Picture'>
 			<input class="dishId" type = 'hidden' value='<%= category.id %>'>
-			<button class='updateDishButton'>Add</button>
+			<button class='updateDishButton btn btn-material-light-green btn-sm'>Add</button>
 		</span>
 		
 			
 		
 	</script>
+		<div class='col-md-6'>
 <ul id ='dishesList'>
 				
 			</ul>
 	<script type = 'text/template' id='dishesTemplate'></body>
 	<span class='dishes'>
 		<%=dish.name %>
-		<span class = dishPicture><img src=<%=dish.image_url %>></span>
+		<span class = dishPicture><img style="height:150px;max-width:150px;" src=<%=dish.image_url %>></span>
 		Price: <%=dish.price %>
-		<button class='editDishButton'>Edit</button>
-		<button class='deleteDishButton'>Delete</button>
+		<button class='editDishButton btn btn-material-teal btn-sm'>Edit</button>
+		<button class='deleteDishButton btn btn-material-red btn-sm'>Delete</button>
 	</span>
 	<span class='editDishForm' style='display: none'>
-			<input type = 'text' id= 'newName<%= dish.id %>' value='<%= dish.name %>'>
-			<input type = 'text' id= 'newPrice<%= dish.id %>' value='<%= dish.price %>'>
-			<input type = 'text' id= 'newPic<%= dish.id %>' value='<%= dish.image_url %>'>
-			<button class='updateDishButton'>Update</button>
+			<input type = 'text' id= 'newName<%= dish.id %>' class='form-control floating-label' value='<%= dish.name %>'>
+			<input type = 'text' id= 'newPrice<%= dish.id %>' class='form-control floating-label' value='<%= dish.price %>'>
+			<input type = 'text' id= 'newPic<%= dish.id %>' class='form-control floating-label' value='<%= dish.image_url %>'>
+			<button class='updateDishButton btn btn-material-light-green btn-sm'>Update</button>
 		</span>
-			
+		</div>	
+	</div>
 		
+<!-- Container with the initial category creation inputs of Name and Pic -->
+	<div id = "addCategory">
+		<input type="text" id='newCategory' class='form-control floating-label' placeholder='New Category'>
+		<input type = 'text' id='categoryPic' class='form-control floating-label' placeholder='pic url'>
+		<button id='createCategory' class='btn btn-material-light-green btn-sm'>Create!</button>
+	</div>
 	</script>
 </html>
